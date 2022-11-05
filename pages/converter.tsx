@@ -144,160 +144,183 @@ export default function Converter() {
               </label>
             </div>
           ) : (
-            // Show Input Video File name and Convert Button
-            <div className="max-w-5xl mx-auto p-10 mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between space-x-0 space-y-10 md:space-y-0 md:space-x-10  rounded-lg shadow-md border border-gray-100 ">
-              <h2 className="text-xl font-semibold truncate max-w-xs">
-                {inputVideo.name}
-              </h2>
+            <>
+              {/* // Show Input Video File name and Convert Button */}
+              <div className="max-w-5xl mx-auto p-10 mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between space-x-0 space-y-10 md:space-y-0 md:space-x-10  rounded-lg shadow-md border border-gray-100 ">
+                <h2 className="text-xl font-semibold truncate max-w-xs">
+                  {inputVideo.name}
+                </h2>
 
-              {converting ? (
-                <div className="flex items-center justify-center text-gray-600">
-                  Time Elapsed:{" "}
-                  {progress < 1
-                    ? (Date.now() - startTime) / 1000
-                    : timeTaken / 1000}{" "}
-                  sec
-                </div>
-              ) : (
-                // Video Format dropdown option
-                <div className="flex items-center justify-center">
-                  <Listbox
-                    disabled={startConversion}
-                    value={selectedFormat}
-                    onChange={setSelectedFormat}
-                  >
-                    {({ open }) => (
-                      <div className="px-5 flex-shrink-0 w-40">
-                        <div className="relative">
-                          <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm disabled:bg-gray-200">
-                            <span className="flex items-center">
-                              <span className="ml-3 block truncate">
-                                {selectedFormat}
-                              </span>
-                            </span>
-                            <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                              <ChevronUpDownIcon
-                                className="h-5 w-5 text-gray-400"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          </Listbox.Button>
-
-                          <Transition
-                            show={open}
-                            as={Fragment}
-                            leave="transition ease-in duration-100"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                          >
-                            <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              {videoFormats.map((format) => (
-                                <Listbox.Option
-                                  key={format}
-                                  className={({ active }) =>
-                                    classNames(
-                                      active
-                                        ? "text-white bg-indigo-600"
-                                        : "text-gray-900",
-                                      "relative cursor-default select-none py-2 pl-3 pr-9"
-                                    )
-                                  }
-                                  value={format}
-                                >
-                                  {({ selected, active }) => (
-                                    <>
-                                      <div className="flex items-center">
-                                        <span
-                                          className={classNames(
-                                            selected
-                                              ? "font-semibold"
-                                              : "font-normal",
-                                            "ml-3 block truncate"
-                                          )}
-                                        >
-                                          {format}
-                                        </span>
-                                      </div>
-
-                                      {selected ? (
-                                        <span
-                                          className={classNames(
-                                            active
-                                              ? "text-white"
-                                              : "text-indigo-600",
-                                            "absolute inset-y-0 right-0 flex items-center pr-4"
-                                          )}
-                                        >
-                                          <CheckIcon
-                                            className="h-5 w-5"
-                                            aria-hidden="true"
-                                          />
-                                        </span>
-                                      ) : null}
-                                    </>
-                                  )}
-                                </Listbox.Option>
-                              ))}
-                            </Listbox.Options>
-                          </Transition>
-                        </div>
-                      </div>
-                    )}
-                  </Listbox>
-
-                  {/*  Convert Button */}
-                  <button
-                    disabled={startConversion}
-                    className="flex p-1 items-center justify-center rounded-md border border-transparent bg-indigo-600  text-base font-medium text-white hover:bg-indigo-700 disabled:bg-gray-500"
-                    onClick={() => {
-                      setStartConversion(true);
-                      convertVideo();
-                    }}
-                  >
-                    <ArrowRightIcon className="w-6 h-6" />
-                  </button>
-                </div>
-              )}
-
-              {/* Output and Delete Button */}
-              <div className="flex space-x-10">
-                {outputVideo ? (
-                  <a
-                    className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
-                    href={URL.createObjectURL(outputVideo)}
-                    download={outputVideo.name}
-                  >
-                    Download
-                  </a>
+                {converting ? (
+                  <div className="flex items-center justify-center text-gray-600">
+                    Time Elapsed:{" "}
+                    {progress < 1
+                      ? (Date.now() - startTime) / 1000
+                      : timeTaken / 1000}{" "}
+                    sec
+                  </div>
                 ) : (
-                  <div className=" h-[62px] w-[165px] bg-gray-200 rounded-md">
-                    <div
-                      className="rounded-md h-full bg-gradient-to-tr bg-indigo-700"
-                      style={{ width: `${progress * 100}%` }}
-                    ></div>
+                  // Video Format dropdown option
+                  <div className="flex items-center justify-center">
+                    <Listbox
+                      disabled={startConversion}
+                      value={selectedFormat}
+                      onChange={setSelectedFormat}
+                    >
+                      {({ open }) => (
+                        <div className="px-5 flex-shrink-0 w-40">
+                          <div className="relative">
+                            <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm disabled:bg-gray-200">
+                              <span className="flex items-center">
+                                <span className="ml-3 block truncate">
+                                  {selectedFormat}
+                                </span>
+                              </span>
+                              <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+                                <ChevronUpDownIcon
+                                  className="h-5 w-5 text-gray-400"
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            </Listbox.Button>
+
+                            <Transition
+                              show={open}
+                              as={Fragment}
+                              leave="transition ease-in duration-100"
+                              leaveFrom="opacity-100"
+                              leaveTo="opacity-0"
+                            >
+                              <Listbox.Options className="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                {videoFormats.map((format) => (
+                                  <Listbox.Option
+                                    key={format}
+                                    className={({ active }) =>
+                                      classNames(
+                                        active
+                                          ? "text-white bg-indigo-600"
+                                          : "text-gray-900",
+                                        "relative cursor-default select-none py-2 pl-3 pr-9"
+                                      )
+                                    }
+                                    value={format}
+                                  >
+                                    {({ selected, active }) => (
+                                      <>
+                                        <div className="flex items-center">
+                                          <span
+                                            className={classNames(
+                                              selected
+                                                ? "font-semibold"
+                                                : "font-normal",
+                                              "ml-3 block truncate"
+                                            )}
+                                          >
+                                            {format}
+                                          </span>
+                                        </div>
+
+                                        {selected ? (
+                                          <span
+                                            className={classNames(
+                                              active
+                                                ? "text-white"
+                                                : "text-indigo-600",
+                                              "absolute inset-y-0 right-0 flex items-center pr-4"
+                                            )}
+                                          >
+                                            <CheckIcon
+                                              className="h-5 w-5"
+                                              aria-hidden="true"
+                                            />
+                                          </span>
+                                        ) : null}
+                                      </>
+                                    )}
+                                  </Listbox.Option>
+                                ))}
+                              </Listbox.Options>
+                            </Transition>
+                          </div>
+                        </div>
+                      )}
+                    </Listbox>
+
+                    {/*  Convert Button */}
+                    <button
+                      disabled={startConversion}
+                      className="flex p-1 items-center justify-center rounded-md border border-transparent bg-indigo-600  text-base font-medium text-white hover:bg-indigo-700 disabled:bg-gray-500"
+                      onClick={() => {
+                        setStartConversion(true);
+                        convertVideo();
+                      }}
+                    >
+                      <ArrowRightIcon className="w-6 h-6" />
+                    </button>
                   </div>
                 )}
 
-                <button
-                  disabled={startConversion}
-                  onClick={() => {
-                    setWarning(false);
-                    setDragging(false);
-                    setStartConversion(false);
-                    setConverting(false);
-                    setProgress(0);
-                    setStartTime(0);
-                    setTimeTaken(0);
-                    setInputVideo(undefined);
-                    setOutputVideo(undefined);
-                    setSelectedFormat(videoFormats[3]);
-                  }}
-                  className="text-gray-400 hover:text-red-500 disabled:text-gray-400"
-                >
-                  <TrashIcon className="w-6 h-6" />
-                </button>
+                {/* Output and Delete Button */}
+                <div className="flex space-x-10">
+                  {outputVideo ? (
+                    <a
+                      className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+                      href={URL.createObjectURL(outputVideo)}
+                      download={outputVideo.name}
+                    >
+                      Download
+                    </a>
+                  ) : (
+                    <div className=" h-[62px] w-[165px] bg-gray-200 rounded-md">
+                      <div
+                        className="rounded-md h-full bg-gradient-to-tr bg-indigo-700"
+                        style={{ width: `${progress * 100}%` }}
+                      ></div>
+                    </div>
+                  )}
+
+                  <button
+                    disabled={startConversion}
+                    onClick={() => {
+                      setWarning(false);
+                      setDragging(false);
+                      setStartConversion(false);
+                      setConverting(false);
+                      setProgress(0);
+                      setStartTime(0);
+                      setTimeTaken(0);
+                      setInputVideo(undefined);
+                      setOutputVideo(undefined);
+                      setSelectedFormat(videoFormats[3]);
+                    }}
+                    className="text-gray-400 hover:text-red-500 disabled:text-gray-400"
+                  >
+                    <TrashIcon className="w-6 h-6" />
+                  </button>
+                </div>
               </div>
-            </div>
+              <div>
+                {outputVideo && (
+                  <button
+                    onClick={() => {
+                      setWarning(false);
+                      setDragging(false);
+                      setStartConversion(false);
+                      setConverting(false);
+                      setProgress(0);
+                      setStartTime(0);
+                      setTimeTaken(0);
+                      setInputVideo(undefined);
+                      setOutputVideo(undefined);
+                      setSelectedFormat(videoFormats[3]);
+                    }}
+                    className="mx-auto mt-10 flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+                  >
+                    Convert Again
+                  </button>
+                )}
+              </div>
+            </>
           )}
         </div>
       </div>
