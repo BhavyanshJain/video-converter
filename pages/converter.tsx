@@ -34,6 +34,19 @@ export default function Converter() {
     return classes.filter(Boolean).join(" ");
   }
 
+  function reset() {
+    setWarning(false);
+    setDragging(false);
+    setStartConversion(false);
+    setConverting(false);
+    setStartTime(0);
+    setTimeTaken(0);
+    setProgress(0);
+    setInputVideo(undefined);
+    setOutputVideo(undefined);
+    setSelectedFormat(videoFormats[3]);
+  }
+
   async function convertVideo() {
     if (!ffmpeg.isLoaded()) await ffmpeg.load();
 
@@ -281,18 +294,7 @@ export default function Converter() {
 
                   <button
                     disabled={startConversion}
-                    onClick={() => {
-                      setWarning(false);
-                      setDragging(false);
-                      setStartConversion(false);
-                      setConverting(false);
-                      setProgress(0);
-                      setStartTime(0);
-                      setTimeTaken(0);
-                      setInputVideo(undefined);
-                      setOutputVideo(undefined);
-                      setSelectedFormat(videoFormats[3]);
-                    }}
+                    onClick={() => reset()}
                     className="text-gray-400 hover:text-red-500 disabled:text-gray-400"
                   >
                     <TrashIcon className="w-6 h-6" />
@@ -302,18 +304,7 @@ export default function Converter() {
               <div>
                 {outputVideo && (
                   <button
-                    onClick={() => {
-                      setWarning(false);
-                      setDragging(false);
-                      setStartConversion(false);
-                      setConverting(false);
-                      setProgress(0);
-                      setStartTime(0);
-                      setTimeTaken(0);
-                      setInputVideo(undefined);
-                      setOutputVideo(undefined);
-                      setSelectedFormat(videoFormats[3]);
-                    }}
+                    onClick={() => reset()}
                     className="mx-auto mt-10 flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
                   >
                     Convert Again
