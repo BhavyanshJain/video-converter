@@ -10,10 +10,9 @@
   <h1 align="center">Video Converter</h1>
   
   <p align="center">
-    <!-- short description -->
-    <br />
-    <a href="https://vc.bhavyansh.codes/"><i>View Demo</i></a>
+    Minimalistic video converter based on FFMPEG WASM binary with a straightforward UI.
   </p>
+  <a href="https://vc.bhavyansh.codes/"><i>View Demo</i></a>
 </div>
 
 <br/>
@@ -46,7 +45,7 @@
 
 ### About
 
-<!-- long description -->
+<!-- long summary -->
 
 #### Built With
 
@@ -122,7 +121,8 @@ You must have the following installed on your local machine.
 
 4. Admin Page
 
-   ![Example screenshot](./images/admin-page.png)
+   ![Example screenshot](./images/admin-page-overview.png)
+   ![Example screenshot](./images/admin-page-details.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
