@@ -45,7 +45,11 @@
 
 ### About
 
-<!-- long summary -->
+An online video converter that works on a web-assembly binary [ffmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm) which utilizes client-side resources for processing. This makes most of the web-app access backend resources smartly and gives a seamless front-end user experience.
+
+The UI has been tweaked to look simple yet elegant; inspired from TailwindUI, which makes the usage of the application as easy to understand as possible along with google based login to access the app, keeping the broad audience in mind.
+
+It uses mongodb to store statistic data and tremor.so to display those statistics on a customized admin dashboard, in a visually appealing manner to the user.
 
 #### Built With
 
